@@ -28,21 +28,30 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="wrapper">
-        <h1 className="text-stone-800">
-          Nametionalize - Predict your nationality by your name
-        </h1>
+        <h1 className="text-2xl text-stone-800 mt-4">Nametionalize</h1>
+        <p className="text-sm text-stone-800">
+          Have you ever wondered if your name could reveal something about
+          nationality? Yes, let's play a little game of prediction! Based on
+          your name, what do you think your nationality might be?
+        </p>
         <input
           type="text"
-          value={name}
-          className="border border-stone-800 outline-none"
+          value={name.toUpperCase()}
           onChange={(e) => setName(e.target.value)}
+          className="w-full text-sm font-bold text-stone-800 border border-stone-400 outline-none rounded-sm py-1 px-2 my-4"
         />
-        {result.map((item) => (
-          <div key={item.country_id}>
-            <p>{item.country_id}</p>
-            <p>{item.probability}</p>
-          </div>
-        ))}
+        <div className="flex flex-col gap-2">
+          {result.map((item) => (
+            <div key={item.country_id}>
+              <p className="text-sm text-stone-800">
+                Country: {item.country_id}
+              </p>
+              <p className="text-sm text-stone-800">
+                Probability: {item.probability}
+              </p>
+            </div>
+          ))}
+        </div>
       </main>
     </>
   );

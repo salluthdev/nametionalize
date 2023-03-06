@@ -30,7 +30,7 @@ p {
   font-family: "Noto Sans";
 }
 .wrapper {
-  max-width: 1200px;
-  padding: 0 24px;
+  max-width: 480px;
+  padding: 0 16px;
   margin: 0 auto;
 }
