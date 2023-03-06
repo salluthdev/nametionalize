@@ -6,3 +6,22 @@
 body {
   overflow-x: hidden;
 }
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/fonts/NotoSans-Regular.ttf");
+}
+@font-face {
+  font-family: "Noto Sans Bold";
+  src: url("/fonts/NotoSans-Bold.ttf");
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Noto Sans Bold";
+}
+p {
+  font-family: "Noto Sans";
+}
