@@ -7,13 +7,14 @@ interface ResultType {
 }
 
 export default function Home() {
+  const [name, setName] = useState<string>("");
+  const [result, setResult] = useState<Array<ResultType>>([]);
+
   useEffect(() => {
-    fetch("https://api.nationalize.io?name=michael")
+    fetch("https://api.nationalize.io?name=" + name)
       .then((res) => res.json())
       .then((data) => setResult(data.country));
-  }, []);
-
-  const [result, setResult] = useState<Array<ResultType>>([]);
+  }, [name]);
 
   return (
     <>
@@ -30,7 +31,12 @@ export default function Home() {
         <h1 className="text-stone-800">
           Nametionalize - Predict your nationality by your name
         </h1>
-        <input type="text" className="border border-stone-800 outline-none" />
+        <input
+          type="text"
+          value={name}
+          className="border border-stone-800 outline-none"
+          onChange={(e) => setName(e.target.value)}
+        />
         {result.map((item) => (
           <div key={item.country_id}>
             <p>{item.country_id}</p>
