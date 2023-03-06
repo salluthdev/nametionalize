@@ -13,7 +13,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>Nametionalize - Predict your nationality by your name</h1>
+        <h1 className="text-yellow-600">
+          Nametionalize - Predict your nationality by your name
+        </h1>
+        <p>Oke?</p>
       </main>
     </>
   );
