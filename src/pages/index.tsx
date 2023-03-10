@@ -14,19 +14,29 @@ export default function Home() {
   const [flagUrl, setFlagUrl] = useState<string[]>([]);
   const [goSearch, setGoSearch] = useState<boolean>(false);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(true);
+  const [playAnimation, setPlayAnimation] = useState(false);
+
+  useEffect(() => {
+    setPlayAnimation(true);
+    setTimeout(() => {
+      setPlayAnimation(false);
+    }, 800);
+  }, [result]);
 
   useEffect(() => {
     setGoSearch(false);
     fetch(`https://api.nationalize.io?name=${name}`)
       .then((res) => res.json())
       .then((data) => {
-        const fixedResult = data.country?.map((country: any) => {
-          if (country.country_id === "SQ") {
-            return { ...country, country_id: "SG" };
-          } else {
-            return country;
-          }
-        });
+        const fixedResult = data.country
+          ?.map((country: any) => {
+            if (country.country_id === "SQ") {
+              return { ...country, country_id: "SG" };
+            } else {
+              return country;
+            }
+          })
+          .filter((country: any) => country.probability >= 0.005);
         setResult(fixedResult);
         if (fixedResult?.length > 0) {
           setCountryId(fixedResult[0]?.country_id);
@@ -99,25 +109,25 @@ export default function Home() {
                   e.preventDefault();
                 }
               }}
-              className="w-full h-full text-sm font-bold text-stone-800 outline-none py-1 px-2"
+              className="w-full h-full text-sm font-bold text-stone-800 rounded-l-sm outline-none py-1 px-2"
             />
             <button
-              className="h-full font-bold text-white bg-green-400 px-6"
+              className="h-full font-bold text-white bg-green-400 rounded-r-sm px-6"
               onClick={() => setGoSearch(true)}
             >
               Go!
             </button>
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-4">
             {result &&
               result.map((item, index) => (
                 <div key={item.country_id}>
                   <div className="flex items-center gap-1 bg-stone-800 p-1">
-                    <h4 className="text-sm font-bold text-white">
+                    <h4 className="text-base font-bold text-white">
                       {regionName(item.country_id)}
                     </h4>
                     {loadingFlag ? (
-                      <div className="w-7 h-4 bg-stone-200"></div>
+                      <div className="w-7 h-4 bg-stone-200 rounded-sm"></div>
                     ) : (
                       <div className="w-7 h-4 relative">
                         <Image
@@ -125,18 +135,27 @@ export default function Home() {
                           fill
                           object-fit="cover"
                           alt="flag"
+                          className="rounded-sm"
                         />
                       </div>
                     )}
                   </div>
                   <div className="w-full flex items-center gap-2">
                     <div
-                      className="h-6 bg-green-400 rounded-r"
+                      className="h-7"
                       style={{
                         width: `${Math.round(item.probability * 100)}%`,
                       }}
-                    ></div>
-
+                    >
+                      <div
+                        className={`h-full bg-green-400 rounded-sm ${
+                          playAnimation
+                            ? "animate-[progressBar_0.8s_forwards]"
+                            : ""
+                        }`}
+                        onAnimationEnd={() => setPlayAnimation(false)}
+                      ></div>
+                    </div>
                     <p className="text-sm text-white">
                       {cleanNumber(item.probability * 100)}%
                     </p>

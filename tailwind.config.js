@@ -2,7 +2,14 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        progressBar: {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
+        },
+      },
+    },
   },
   plugins: [],
 };
