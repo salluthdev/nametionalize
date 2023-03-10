@@ -14,6 +14,7 @@ body {
   font-family: "Noto Sans";
   src: url("/fonts/NotoSans-Regular.ttf");
 }
+
 @font-face {
   font-family: "Noto Sans Bold";
   src: url("/fonts/NotoSans-Bold.ttf");

@@ -65,6 +65,10 @@ export default function Home() {
     }
   }, [result, flagsUrl]);
 
+  function cleanNumber(e: any) {
+    return Number.parseFloat(e).toFixed(2);
+  }
+
   return (
     <>
       <Head>
@@ -103,9 +107,9 @@ export default function Home() {
             {result &&
               result.map((item, index) => (
                 <div key={item.country_id}>
-                  <p className="text-sm text-stone-800">
+                  <h4 className="text-sm font-bold text-stone-800">
                     {regionName(item.country_id)}
-                  </p>
+                  </h4>
                   {loadingFlag ? (
                     <div className="w-10 h-5 bg-stone-200"></div>
                   ) : (
@@ -119,7 +123,7 @@ export default function Home() {
                     </div>
                   )}
                   <p className="text-sm text-stone-800">
-                    Probability: {item.probability}
+                    Probability: {cleanNumber(item.probability * 100)}
                   </p>
                 </div>
               ))}
