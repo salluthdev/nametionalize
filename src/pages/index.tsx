@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 interface ResultType {
   country_id: string;
@@ -15,6 +15,7 @@ export default function Home() {
   const [goSearch, setGoSearch] = useState<boolean>(false);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(true);
   const [playAnimation, setPlayAnimation] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setPlayAnimation(true);
@@ -25,6 +26,7 @@ export default function Home() {
 
   useEffect(() => {
     setGoSearch(false);
+    setResult([]);
     fetch(`https://api.nationalize.io?name=${name}`)
       .then((res) => res.json())
       .then((data) => {
@@ -109,20 +111,25 @@ export default function Home() {
                   e.preventDefault();
                 }
               }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setGoSearch(true);
+                }
+              }}
               className="w-full h-full text-sm font-bold text-stone-800 rounded-l-sm outline-none py-1 px-2"
             />
             <button
-              className="h-full font-bold text-white bg-green-400 rounded-r-sm px-6"
+              className="h-full font-bold text-white bg-stone-500 rounded-r-sm px-6 hover:bg-stone-600"
               onClick={() => setGoSearch(true)}
             >
               Go!
             </button>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 mt-4">
             {result &&
               result.map((item, index) => (
                 <div key={item.country_id}>
-                  <div className="flex items-center gap-1 bg-stone-800 p-1">
+                  <div className="flex items-center gap-1 bg-stone-800 mb-1">
                     <h4 className="text-base font-bold text-white">
                       {regionName(item.country_id)}
                     </h4>
