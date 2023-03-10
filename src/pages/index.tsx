@@ -80,10 +80,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="wrapper min-h-screen bg-slate-200">
+      <main className="wrapper min-h-screen bg-stone-800">
         <div className="py-4">
-          <h1 className="text-2xl text-stone-800 mb-1">Nametionalize</h1>
-          <p className="text-sm text-stone-800">
+          <h1 className="text-2xl text-white mb-1">Nametionalize</h1>
+          <p className="text-sm text-white">
             Have you ever wondered if your name could reveal something about
             nationality? Yes, let's play a little game of prediction! Based on
             your name, what do you think your nationality might be?
@@ -94,10 +94,15 @@ export default function Home() {
               placeholder="NAME"
               value={name.toUpperCase()}
               onChange={(e) => setName(e.target.value)}
-              className="w-full h-full text-sm font-bold text-stone-800 border border-stone-400 outline-none rounded-sm py-1 px-2"
+              onKeyPress={(e) => {
+                if (e.key === " ") {
+                  e.preventDefault();
+                }
+              }}
+              className="w-full h-full text-sm font-bold text-stone-800 outline-none py-1 px-2"
             />
             <button
-              className="h-full font-bold text-white bg-stone-800 px-6"
+              className="h-full font-bold text-white bg-green-400 px-6"
               onClick={() => setGoSearch(true)}
             >
               Go!
@@ -107,24 +112,35 @@ export default function Home() {
             {result &&
               result.map((item, index) => (
                 <div key={item.country_id}>
-                  <h4 className="text-sm font-bold text-stone-800">
-                    {regionName(item.country_id)}
-                  </h4>
-                  {loadingFlag ? (
-                    <div className="w-10 h-5 bg-stone-200"></div>
-                  ) : (
-                    <div className="w-10 h-6 relative">
-                      <Image
-                        src={flagUrl[index]}
-                        fill
-                        object-fit="cover"
-                        alt="flag"
-                      />
-                    </div>
-                  )}
-                  <p className="text-sm text-stone-800">
-                    Probability: {cleanNumber(item.probability * 100)}
-                  </p>
+                  <div className="flex items-center gap-1 bg-stone-800 p-1">
+                    <h4 className="text-sm font-bold text-white">
+                      {regionName(item.country_id)}
+                    </h4>
+                    {loadingFlag ? (
+                      <div className="w-7 h-4 bg-stone-200"></div>
+                    ) : (
+                      <div className="w-7 h-4 relative">
+                        <Image
+                          src={flagUrl[index]}
+                          fill
+                          object-fit="cover"
+                          alt="flag"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <div className="w-full flex items-center gap-2">
+                    <div
+                      className="h-6 bg-green-400 rounded-r"
+                      style={{
+                        width: `${Math.round(item.probability * 100)}%`,
+                      }}
+                    ></div>
+
+                    <p className="text-sm text-white">
+                      {cleanNumber(item.probability * 100)}%
+                    </p>
+                  </div>
                 </div>
               ))}
           </div>
