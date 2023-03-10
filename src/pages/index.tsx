@@ -87,7 +87,7 @@ export default function Home() {
         <title>Nametionalize - Predict your nationality by your name</title>
         <meta
           name="description"
-          content="Have you ever wondered if your name could reveal something about nationality? Yes, let&lsquo;s play a little game of prediction! Based on your name, what do you think your nationality might be?"
+          content="Have you ever wondered if your name could reveal something about nationality? Yes, let's play a little game of prediction! Based on your name, what do you think your nationality might be?"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -97,8 +97,8 @@ export default function Home() {
           <h1 className="text-2xl text-white mb-1">Nametionalize</h1>
           <p className="text-sm text-white">
             Have you ever wondered if your name could reveal something about
-            nationality? Yes, let's play a little game of prediction! Based on
-            your name, what do you think your nationality might be?
+            nationality? Yes, let&#39;s play a little game of prediction! Based
+            on your name, what do you think your nationality might be?
           </p>
           <div className="h-10 flex items-center my-4">
             <input
