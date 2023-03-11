@@ -15,7 +15,6 @@ export default function Home() {
   const [goSearch, setGoSearch] = useState<boolean>(false);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(true);
   const [playAnimation, setPlayAnimation] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setPlayAnimation(true);
@@ -46,10 +45,10 @@ export default function Home() {
       });
   }, [goSearch]);
 
-  const regionName = (countryId: string) => {
+  const regionName = useMemo(() => {
     const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
-    return regionNames.of(countryId);
-  };
+    return (countryId: string) => regionNames.of(countryId);
+  }, [countryId]);
 
   const flagsUrl = useMemo(() => {
     return result?.map(
