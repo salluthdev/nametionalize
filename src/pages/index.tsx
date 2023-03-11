@@ -94,7 +94,7 @@ export default function Home() {
       </Head>
       <main className="wrapper min-h-screen bg-stone-800">
         <div className="py-4">
-          <h1 className="text-2xl text-white mb-1">Nametionalize</h1>
+          <h1 className="text-[28px] text-white">Nametionalize</h1>
           <p className="text-sm text-white">
             Have you ever wondered if your name could reveal something about
             nationality? Yes, let&#39;s play a little game of prediction! Based

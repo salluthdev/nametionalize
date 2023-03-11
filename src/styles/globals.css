@@ -13,11 +13,13 @@ body {
 }
 @font-face {
   font-family: "Noto Sans";
-  src: url("/fonts/NotoSans-Regular.ttf");
+  src: url("/fonts/NotoSans-Regular.ttf") format("truetype");
+  font-display: swap;
 }
 @font-face {
   font-family: "Noto Sans Bold";
-  src: url("/fonts/NotoSans-Bold.ttf");
+  src: url("/fonts/NotoSans-Bold.ttf") format("truetype");
+  font-display: swap;
 }
 h1,
 h2,
