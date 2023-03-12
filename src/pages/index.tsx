@@ -118,7 +118,7 @@ export default function Home() {
       <main className="wrapper bg-stone-800">
         <div className="min-h-[92vh] flex flex-col justify-between pt-4 pb-6">
           <div>
-            <h1 className="text-[28px] text-white">Nametionalize</h1>
+            <h1 className="text-[28px] font-bold text-white">Nametionalize</h1>
             <p className="text-sm text-white">
               Have you ever wondered if your name could reveal something about
               nationality? Let&#39;s play a little game of prediction!

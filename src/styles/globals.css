@@ -8,29 +8,9 @@
   margin: 0;
 }
 body {
-  overflow-x: hidden;
+  font-family: "Noto Sans", sans-serif;
   background: rgb(41 37 36 / 1);
-}
-@font-face {
-  font-family: "Noto Sans";
-  src: url("/fonts/NotoSans-Regular.ttf") format("truetype");
-  font-display: swap;
-}
-@font-face {
-  font-family: "Noto Sans Bold";
-  src: url("/fonts/NotoSans-Bold.ttf") format("truetype");
-  font-display: swap;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Noto Sans Bold";
-}
-p {
-  font-family: "Noto Sans";
+  overflow-x: hidden;
 }
 .wrapper {
   max-width: 480px;
