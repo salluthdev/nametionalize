@@ -199,22 +199,29 @@ export default function Home() {
               ) : (
                 <>
                   {name !== "" && noData == true ? (
-                    <>
-                      <Image
-                        src={"/img/thinking-emoji.png"}
-                        width={80}
-                        height={80}
-                        alt="no data"
-                      />
-                      <h1>No data</h1>
-                    </>
+                    <div className="flex flex-col gap-4 justify-center items-center mt-6">
+                      <div className="relative w-20 h-20">
+                        <Image
+                          src={"/img/thinking-emoji.png"}
+                          fill
+                          object-fit="cover"
+                          sizes="100%"
+                          alt="no data"
+                        />
+                      </div>
+                      <p className="text-sm text-white">
+                        Hmm.. is that your real name?
+                      </p>
+                    </div>
                   ) : (
-                    <Image
-                      src={"/svg/arrow.svg"}
-                      width={40}
-                      height={40}
-                      alt="arrow"
-                    />
+                    <div className="relative w-10 h-10">
+                      <Image
+                        src={"/svg/arrow.svg"}
+                        fill
+                        object-fit="cover"
+                        alt="arrow"
+                      />
+                    </div>
                   )}
                 </>
               )}
@@ -226,7 +233,14 @@ export default function Home() {
             className="text-sm text-white hover:underline"
           >
             <div className="flex items-center gap-1">
-              <Image src={"/svg/star.svg"} width={16} height={16} alt="star" />
+              <div className="relative w-4 h-4">
+                <Image
+                  src={"/svg/star.svg"}
+                  fill
+                  object-fit="cover"
+                  alt="star"
+                />
+              </div>
               <span className="font-bold">{githubStars}</span> on
               <span className="font-bold">Github</span>, and still counting..
             </div>
