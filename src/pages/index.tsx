@@ -115,7 +115,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="wrapper bg-stone-800">
+      <main className="wrapper">
         <div className="min-h-[92vh] flex flex-col justify-between pt-4 pb-6">
           <div>
             <h1 className="text-[28px] text-white">Nametionalize</h1>
@@ -142,7 +142,7 @@ export default function Home() {
                 className="w-full h-full text-sm font-bold text-stone-800 rounded-l-sm outline-none py-1 px-2"
               />
               <button
-                className="h-full font-bold text-white bg-stone-500 rounded-r-sm px-6 hover:bg-stone-600"
+                className="h-full font-bold text-white bg-gray-700 rounded-r-sm px-6 hover:bg-gray-800"
                 onClick={() => setGoSearch(true)}
               >
                 Go!
@@ -152,13 +152,13 @@ export default function Home() {
               {result.length !== 0 ? (
                 result.map((item, index) => (
                   <div key={item.country_id}>
-                    <div className="flex items-center gap-1 bg-stone-800 mb-1">
+                    <div className="flex items-center gap-1 mb-1">
                       <h4 className="text-base font-bold text-white">
                         {regionName(item.country_id)}
                       </h4>
                       <>
                         {loadingFlag ? (
-                          <div className="w-7 h-4 bg-stone-200 rounded-sm" />
+                          <div className="w-7 h-4 bg-gray-900 rounded-sm" />
                         ) : (
                           flagUrl.length > 0 && (
                             <div className="w-7 h-4 relative">
