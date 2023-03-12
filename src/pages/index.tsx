@@ -15,6 +15,7 @@ export default function Home() {
   const [goSearch, setGoSearch] = useState<boolean>(false);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   const [playAnimation, setPlayAnimation] = useState<boolean>(false);
+  const [githubStars, setGithubStars] = useState<number>(0);
 
   useEffect(() => {
     setPlayAnimation(true);
@@ -79,6 +80,12 @@ export default function Home() {
   function cleanNumber(e: any) {
     return Number.parseFloat(e).toFixed(2);
   }
+
+  useEffect(() => {
+    fetch("https://api.github.com/repos/salluthdev/nametionalize")
+      .then((res) => res.json())
+      .then((data) => setGithubStars(data.stargazers_count));
+  }, []);
 
   return (
     <>
@@ -184,20 +191,9 @@ export default function Home() {
             className="text-sm text-white hover:underline"
           >
             <div className="flex items-center gap-1">
-              <svg
-                aria-label="star"
-                role="img"
-                height="16"
-                viewBox="0 0 16 16"
-                version="1.1"
-                width="16"
-                data-view-component="true"
-                fill="white"
-              >
-                <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"></path>
-              </svg>
-              <span className="font-bold">12</span> on
-              <span className="font-bold">Github</span>, and keep counting!
+              <Image src={"/svg/star.svg"} width={16} height={16} alt="star" />
+              <span className="font-bold">{githubStars}</span> on
+              <span className="font-bold">Github</span>, and still counting..
             </div>
           </a>
         </div>
