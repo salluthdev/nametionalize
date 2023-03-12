@@ -16,36 +16,34 @@ export default function Home() {
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   const [playAnimation, setPlayAnimation] = useState<boolean>(false);
   const [githubStars, setGithubStars] = useState<number>(0);
-
-  // reset animation in every result
-  useEffect(() => {
-    setPlayAnimation(true);
-    setTimeout(() => {
-      setPlayAnimation(false);
-    }, 800);
-  }, [result]);
+  const [noData, setNoData] = useState<boolean>(false);
 
   // fetch the country id and probability
   useEffect(() => {
     setGoSearch(false);
     setResult([]);
-    fetch(`https://api.nationalize.io?name=${name}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const fixedResult = data.country
-          ?.map((country: any) => {
-            if (country.country_id === "SQ") {
-              return { ...country, country_id: "SG" };
-            } else {
-              return country;
-            }
-          })
-          .filter((country: any) => country.probability >= 0.005);
-        setResult(fixedResult);
-        if (fixedResult?.length > 0) {
-          setCountryId(fixedResult[0]?.country_id);
-        }
-      });
+    if (name) {
+      fetch(`https://api.nationalize.io?name=${name}`)
+        .then((res) => res.json())
+        .then((data) => {
+          const fixedResult = data.country
+            ?.map((country: any) => {
+              if (country.country_id === "SQ") {
+                return { ...country, country_id: "SG" };
+              } else {
+                return country;
+              }
+            })
+            .filter((country: any) => country.probability >= 0.005);
+          setResult(fixedResult);
+          if (fixedResult?.length > 0) {
+            setCountryId(fixedResult[0]?.country_id);
+            setNoData(false);
+          } else {
+            setNoData(true);
+          }
+        });
+    }
   }, [goSearch]);
 
   // display the region name from country id
@@ -80,6 +78,19 @@ export default function Home() {
         .finally(() => setLoadingFlag(false));
     }
   }, [result, flagsUrl]);
+
+  // reset the no data component if user change the name
+  useEffect(() => {
+    setNoData(false);
+  }, [name]);
+
+  // reset animation in every result
+  useEffect(() => {
+    setPlayAnimation(true);
+    setTimeout(() => {
+      setPlayAnimation(false);
+    }, 800);
+  }, [result]);
 
   // set the max number after comma is two
   function cleanNumber(e: any) {
@@ -138,26 +149,30 @@ export default function Home() {
               </button>
             </div>
             <div className="flex flex-col gap-4 mt-4">
-              {result.length ? (
+              {result.length !== 0 ? (
                 result.map((item, index) => (
                   <div key={item.country_id}>
                     <div className="flex items-center gap-1 bg-stone-800 mb-1">
                       <h4 className="text-base font-bold text-white">
                         {regionName(item.country_id)}
                       </h4>
-                      {loadingFlag ? (
-                        <div className="w-7 h-4 bg-stone-200 rounded-sm"></div>
-                      ) : (
-                        <div className="w-7 h-4 relative">
-                          <Image
-                            src={flagUrl[index]}
-                            fill
-                            object-fit="cover"
-                            alt="flag"
-                            className="rounded-sm"
-                          />
-                        </div>
-                      )}
+                      <>
+                        {loadingFlag ? (
+                          <div className="w-7 h-4 bg-stone-200 rounded-sm" />
+                        ) : (
+                          flagUrl.length > 0 && (
+                            <div className="w-7 h-4 relative">
+                              <Image
+                                src={flagUrl[index]}
+                                fill
+                                object-fit="cover"
+                                alt="flag"
+                                className="rounded-sm"
+                              />
+                            </div>
+                          )
+                        )}
+                      </>
                     </div>
                     <div className="w-full flex items-center gap-2">
                       <div
@@ -182,12 +197,26 @@ export default function Home() {
                   </div>
                 ))
               ) : (
-                <Image
-                  src={"/svg/arrow.svg"}
-                  width={40}
-                  height={40}
-                  alt="arrow"
-                />
+                <>
+                  {name !== "" && noData == true ? (
+                    <>
+                      <Image
+                        src={"/img/thinking-emoji.png"}
+                        width={80}
+                        height={80}
+                        alt="no data"
+                      />
+                      <h1>No data</h1>
+                    </>
+                  ) : (
+                    <Image
+                      src={"/svg/arrow.svg"}
+                      width={40}
+                      height={40}
+                      alt="arrow"
+                    />
+                  )}
+                </>
               )}
             </div>
           </div>
