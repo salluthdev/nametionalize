@@ -17,6 +17,7 @@ export default function Home() {
   const [playAnimation, setPlayAnimation] = useState<boolean>(false);
   const [githubStars, setGithubStars] = useState<number>(0);
 
+  // reset animation in every result
   useEffect(() => {
     setPlayAnimation(true);
     setTimeout(() => {
@@ -24,6 +25,7 @@ export default function Home() {
     }, 800);
   }, [result]);
 
+  // fetch the country id and probability
   useEffect(() => {
     setGoSearch(false);
     setResult([]);
@@ -46,11 +48,13 @@ export default function Home() {
       });
   }, [goSearch]);
 
+  // display the region name from country id
   const regionName = useMemo(() => {
     const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
     return (countryId: string) => regionNames.of(countryId);
   }, [countryId]);
 
+  // fetch the flag images from country id
   const flagsUrl = useMemo(() => {
     return result?.map(
       (item) => `https://countryflagsapi.com/png/${item.country_id}`
@@ -77,10 +81,12 @@ export default function Home() {
     }
   }, [result, flagsUrl]);
 
+  // set the max number after comma is two
   function cleanNumber(e: any) {
     return Number.parseFloat(e).toFixed(2);
   }
 
+  // counting github's stars
   useEffect(() => {
     fetch("https://api.github.com/repos/salluthdev/nametionalize")
       .then((res) => res.json())
