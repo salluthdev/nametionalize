@@ -12,3 +12,6 @@ Have you ever wondered if your name could reveal something about nationality? Le
 
 ## Preview
 ![image](https://user-images.githubusercontent.com/83701344/225028443-b8cac045-2498-423f-8e05-1763ce76a5b8.png)
+
+## Let's try!
+[https://nametionalize.vercel.app/](https://nametionalize.vercel.app/). Anyway, you can support me by starring this project. I appreciate it!
