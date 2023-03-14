@@ -53,31 +53,31 @@ export default function Home() {
   }, [countryId]);
 
   // fetch the flag images from country id
-  const flagsUrl = useMemo(() => {
-    return result?.map(
-      (item) => `https://countryflagsapi.com/png/${item.country_id}`
-    );
-  }, [result]);
+  // const flagsUrl = useMemo(() => {
+  //   return result?.map(
+  //     (item) => `https://flagsapi.com/${item.country_id}/flat/64.png`
+  //   );
+  // }, [result]);
 
-  useEffect(() => {
-    if (result?.length > 0) {
-      setLoadingFlag(true);
-      Promise.all(
-        flagsUrl.map((flagUrl) =>
-          fetch(flagUrl, {
-            method: "GET",
-            headers: {
-              "Content-Type": "image/png",
-            },
-          }).then((res) => res.blob())
-        )
-      )
-        .then((blobs) =>
-          setFlagUrl(blobs.map((blob) => URL.createObjectURL(blob)))
-        )
-        .finally(() => setLoadingFlag(false));
-    }
-  }, [result, flagsUrl]);
+  // useEffect(() => {
+  //   if (result?.length > 0) {
+  //     setLoadingFlag(true);
+  //     Promise.all(
+  //       flagsUrl.map((flagUrl) =>
+  //         fetch(flagUrl, {
+  //           method: "GET",
+  //           headers: {
+  //             "Content-Type": "image/png",
+  //           },
+  //         }).then((res) => res.blob())
+  //       )
+  //     )
+  //       .then((blobs) =>
+  //         setFlagUrl(blobs.map((blob) => URL.createObjectURL(blob)))
+  //       )
+  //       .finally(() => setLoadingFlag(false));
+  //   }
+  // }, [result, flagsUrl]);
 
   // reset the no data component if user change the name
   useEffect(() => {
@@ -160,17 +160,15 @@ export default function Home() {
                         {loadingFlag ? (
                           <div className="w-7 h-4 bg-stone-200 rounded-sm" />
                         ) : (
-                          flagUrl.length > 0 && (
-                            <div className="w-7 h-4 relative">
-                              <Image
-                                src={flagUrl[index]}
-                                fill
-                                object-fit="cover"
-                                alt="flag"
-                                className="rounded-sm"
-                              />
-                            </div>
-                          )
+                          <div className="w-7 h-4 relative">
+                            <Image
+                              src={`https://flagsapi.com/${item.country_id}/flat/64.png`}
+                              fill
+                              object-fit="cover"
+                              alt="flag"
+                              className="rounded-sm"
+                            />
+                          </div>
                         )}
                       </>
                     </div>
