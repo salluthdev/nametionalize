@@ -18,8 +18,6 @@ export default function Home() {
   const [githubStars, setGithubStars] = useState<number>(0);
   const [noData, setNoData] = useState<boolean>(false);
 
-  console.log(flagUrl);
-
   // fetch the country id and probability
   useEffect(() => {
     setGoSearch(false);
