@@ -18,6 +18,8 @@ export default function Home() {
   const [githubStars, setGithubStars] = useState<number>(0);
   const [noData, setNoData] = useState<boolean>(false);
 
+  console.log(flagUrl);
+
   // fetch the country id and probability
   useEffect(() => {
     setGoSearch(false);
@@ -55,7 +57,7 @@ export default function Home() {
   // fetch the flag images from country id
   const flagsUrl = useMemo(() => {
     return result?.map(
-      (item) => `https://countryflagsapi.com/png/${item.country_id}`
+      (item) => `https://flagcdn.com/w160/${item.country_id.toLowerCase()}.png`
     );
   }, [result]);
 
@@ -63,14 +65,7 @@ export default function Home() {
     if (result?.length > 0) {
       setLoadingFlag(true);
       Promise.all(
-        flagsUrl.map((flagUrl) =>
-          fetch(flagUrl, {
-            method: "GET",
-            headers: {
-              "Content-Type": "image/png",
-            },
-          }).then((res) => res.blob())
-        )
+        flagsUrl.map((flagUrl) => fetch(flagUrl).then((res) => res.blob()))
       )
         .then((blobs) =>
           setFlagUrl(blobs.map((blob) => URL.createObjectURL(blob)))
