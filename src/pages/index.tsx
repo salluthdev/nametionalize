@@ -223,7 +223,7 @@ export default function Home() {
           <a
             href="https://github.com/salluthdev/nametionalize"
             target="_blank"
-            className="text-sm text-white hover:underline"
+            className="text-sm hover:underline text-white mt-4"
           >
             <div className="flex items-center gap-1">
               <div className="relative w-4 h-4">
