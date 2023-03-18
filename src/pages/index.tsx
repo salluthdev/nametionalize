@@ -121,12 +121,7 @@ export default function Home() {
                 type="text"
                 placeholder="NAME"
                 value={name.toUpperCase()}
-                onChange={(e) => setName(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === " ") {
-                    e.preventDefault();
-                  }
-                }}
+                onChange={(e) => setName(e.target.value.replaceAll(" ", ""))}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     setGoSearch(true);
