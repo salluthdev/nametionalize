@@ -24,7 +24,13 @@ export default function Home() {
     setResult([]);
     if (name) {
       fetch(`https://api.nationalize.io?name=${name}`)
-        .then((res) => res.json())
+        .then((res) => {
+          if (res.status === 429) {
+            console.log("API rate limit exceeded");
+          } else {
+            return res.json();
+          }
+        })
         .then((data) => {
           const fixedResult = data.country
             ?.map((country: any) => {
