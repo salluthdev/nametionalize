@@ -1,6 +1,10 @@
 import Image from "next/image";
 
-export default function Prevent() {
+interface ErrorProps {
+  text: string;
+}
+
+export default function Prevent({ text }: ErrorProps) {
   return (
     <div className="flex flex-col gap-4 justify-center items-center mt-6">
       <div className="relative w-20 h-20">
@@ -12,7 +16,7 @@ export default function Prevent() {
           alt="no data"
         />
       </div>
-      <p className="text-sm text-white">Hmm.. is that your real name?</p>
+      <p className="text-sm text-white">{text}</p>
     </div>
   );
 }

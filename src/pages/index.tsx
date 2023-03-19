@@ -18,6 +18,7 @@ export default function Home() {
   const [playAnimation, setPlayAnimation] = useState<boolean>(false);
   const [githubStars, setGithubStars] = useState<number>(0);
   const [noData, setNoData] = useState<boolean>(false);
+  const [APILimited, setAPILimited] = useState<boolean>(false);
 
   // fetch the country id and probability
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function Home() {
       fetch(`https://api.nationalize.io?name=${name}`)
         .then((res) => {
           if (res.status === 429) {
-            console.log("API rate limit exceeded");
+            setAPILimited(true);
           } else {
             return res.json();
           }
@@ -193,8 +194,10 @@ export default function Home() {
                 ))
               ) : (
                 <>
-                  {name !== "" && noData == true ? (
-                    <Error />
+                  {APILimited ? (
+                    <Error text="Oops, server request limit reached today!" />
+                  ) : name !== "" && noData == true ? (
+                    <Error text="Hmm.. is that your real name?" />
                   ) : (
                     <div className="relative w-10 h-10">
                       <Image
