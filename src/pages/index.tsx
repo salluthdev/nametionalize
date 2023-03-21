@@ -1,4 +1,4 @@
-import { Error } from "@/components";
+import { Error, GithubStar } from "@/components";
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
@@ -16,7 +16,6 @@ export default function Home() {
   const [goSearch, setGoSearch] = useState<boolean>(false);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   const [playAnimation, setPlayAnimation] = useState<boolean>(false);
-  const [githubStars, setGithubStars] = useState<number>(0);
   const [noData, setNoData] = useState<boolean>(false);
   const [APILimited, setAPILimited] = useState<boolean>(false);
 
@@ -97,13 +96,6 @@ export default function Home() {
   function cleanNumber(e: any) {
     return Number.parseFloat(e).toFixed(2);
   }
-
-  // counting github's stars
-  useEffect(() => {
-    fetch("https://api.github.com/repos/salluthdev/nametionalize")
-      .then((res) => res.json())
-      .then((data) => setGithubStars(data.stargazers_count));
-  }, []);
 
   return (
     <>
@@ -212,24 +204,7 @@ export default function Home() {
               )}
             </div>
           </div>
-          <a
-            href="https://github.com/salluthdev/nametionalize"
-            target="_blank"
-            className="text-sm hover:underline text-white mt-4"
-          >
-            <div className="flex items-center gap-1">
-              <div className="relative w-4 h-4">
-                <Image
-                  src={"/svg/star.svg"}
-                  fill
-                  object-fit="cover"
-                  alt="star"
-                />
-              </div>
-              <span className="font-bold">{githubStars}</span> on
-              <span className="font-bold">Github</span>, and still counting..
-            </div>
-          </a>
+          <GithubStar />
         </div>
       </main>
     </>
