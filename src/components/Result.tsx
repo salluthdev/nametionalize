@@ -80,7 +80,7 @@ export default function Result({ name, goSearch, setGoSearch }: ResultProps) {
         )
         .finally(() => setLoadingFlag(false));
     }
-  }, [result, flagsUrl]);
+  }, [result]);
 
   // reset the no data component if user change the name
   useEffect(() => {
