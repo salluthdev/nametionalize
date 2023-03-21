@@ -1,4 +1,4 @@
-import { GithubStar, Result } from "@/components";
+import { GithubStar, Result, SearchInput } from "@/components";
 import Head from "next/head";
 import { useState } from "react";
 
@@ -25,26 +25,11 @@ export default function Home() {
               Have you ever wondered if your name could reveal something about
               nationality? Let&#39;s play a little game of prediction!
             </p>
-            <div className="h-10 flex items-center my-4">
-              <input
-                type="text"
-                placeholder="NAME"
-                value={name.toUpperCase()}
-                onChange={(e) => setName(e.target.value.replaceAll(" ", ""))}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    setGoSearch(true);
-                  }
-                }}
-                className="w-full h-full text-sm font-bold text-stone-800 rounded-l-sm outline-none py-1 px-2"
-              />
-              <button
-                className="h-full font-bold text-white bg-stone-500 rounded-r-sm px-6 hover:bg-stone-600"
-                onClick={() => setGoSearch(true)}
-              >
-                Go!
-              </button>
-            </div>
+            <SearchInput
+              name={name}
+              setName={setName}
+              setGoSearch={setGoSearch}
+            />
             <Result name={name} goSearch={goSearch} setGoSearch={setGoSearch} />
           </div>
           <GithubStar />
