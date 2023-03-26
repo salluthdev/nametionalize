@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Nametionalize - Predict your nationality by your name</title>
+        <title>Nametionalize - Predict Your Nationality by Your Name</title>
         <meta
           name="description"
           content="Have you ever wondered if your name could reveal something about nationality? Let's play a little game of prediction! Based on your name, what do you think your nationality might be?"
