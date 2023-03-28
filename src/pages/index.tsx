@@ -17,7 +17,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="wrapper bg-stone-800">
+      <main className="wrapper">
         <div className="min-h-[92vh] flex flex-col justify-between pt-4 pb-6">
           <div>
             <h1 className="text-[28px] font-bold text-white">Nametionalize</h1>
