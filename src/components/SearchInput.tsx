@@ -14,8 +14,10 @@ export default function SearchInput({
       <input
         type="text"
         placeholder="NAME"
-        value={name.toUpperCase()}
-        onChange={(e) => setName(e.target.value.replaceAll(" ", ""))}
+        value={name}
+        onChange={(e) =>
+          setName(e.target.value.toUpperCase().replaceAll(" ", ""))
+        }
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             setGoSearch(true);
