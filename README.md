@@ -1,4 +1,4 @@
-# Nametionalize - Predict your nationality by your name 🔮
+# Nametionalize - Predict Your Nationality by Your Name
 Have you ever wondered if your name could reveal something about nationality? Let's play a little game of prediction! Based on your name, what do you think your nationality might be?
 
 [https://nametionalize.vercel.app/](https://nametionalize.vercel.app/)
